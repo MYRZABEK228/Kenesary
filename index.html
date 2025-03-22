@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="kk-KZ">
+<head>
+    <meta charset="UTF-8">
+    <title>Кенесары Қасымұлы - Қазақ батыры</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #e74c3c;
+            --gold: #f1c40f;
+        }
+
+        /* Параллакс эффектісі */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                        url('https://images.unsplash.com/photo-1509558271960-9f13d8f3139e') fixed;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .floating-img {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .title {
+            font-family: 'Arial', sans-serif;
+            font-size: 4rem;
+            color: var(--gold);
+            text-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+
+        /* От текстурасы */
+        .flame-text {
+            background: linear-gradient(45deg, #ff0000, #ff9500, #fff000);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: flame 1s ease-in-out infinite alternate;
+        }
+
+        @keyframes flame {
+            from { text-shadow: 0 0 10px #ff0000; }
+            to { text-shadow: 0 0 20px #ff9500, 0 0 30px #ff0000; }
+        }
+
+        /* Интерактивті таймлайн */
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem;
+            background: #f9f9f9;
+        }
+
+        .timeline-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            transform: scale(0.95);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .timeline-item:hover {
+            transform: scale(1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Басты бет -->
+    <section class="hero">
+        <img src="kene.png" alt="Кенесары" class="floating-img" style="height: 400px">
+        <h1 class="title flame-text">Кенесары Қасымұлы<br><span style="font-size: 2rem">Қазақ халқының батыры</span></h1>
+    </section>
+
+    <!-- Биография -->
+    <section class="timeline">
+        <div class="timeline-item">
+            <h3>1802 жыл</h3>
+            <p>Кенесары сұлтан Әбілқайыр хан әулетінде дүниеге келді</p>
+        </div>
+        <div class="timeline-item">
+            <h3>1837-1847</h3>
+            <p>Ресей әскерлеріне қарсы ұлт-азаттық күресі</p>
+        </div>
+    </section>
+
+    <!-- Қызықты фактілер -->
+    <div class="facts-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; padding: 2rem">
+        <div class="fact-card" style="background: #fff; padding: 1rem; border-radius: 8px">
+            <h3>Керемет факті</h3>
+            <p>Кенесары - қазақ тарихындағы соңғы хан</p>
+        </div>
+    </div>
+
+<script>
+    // Анимациялар үшін базовый JS
+    document.querySelectorAll('.timeline-item').forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            item.style.background = 'linear-gradient(45deg, #f1c40f, #e67e22)';
+        });
+        item.addEventListener('mouseleave', () => {
+            item.style.background = 'white';
+        });
+    });
+
+    // Параллакс эффекті
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        document.querySelector('.hero').style.backgroundPositionY = scrolled * 0.5 + 'px';
+    });
+</script>
+
+</body>
+</html>
