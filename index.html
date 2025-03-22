@@ -1,87 +1,145 @@
 <!DOCTYPE html>
-<html lang="kk-KZ">
+<html lang="kk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Кенесары Қасымұлы | Ұлттық батыр</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Кенесары Қасымұлы</title>
+  <style>
+    /* Негізгі стильдер - минимализм және таза дизайн */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+      overflow-x: hidden;
+    }
+    header {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 30px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      animation: fadeInDown 1s ease-out;
+    }
+    nav {
+      background-color: #444;
+      display: flex;
+      justify-content: center;
+      padding: 10px 0;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 1.1rem;
+      position: relative;
+    }
+    nav a::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      transform: scaleX(0);
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: #fff;
+      transform-origin: bottom right;
+      transition: transform 0.25s ease-out;
+    }
+    nav a:hover::after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
+    section {
+      padding: 40px 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    .card {
+      background-color: #fff;
+      margin-bottom: 20px;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s forwards;
+    }
+    .card:nth-child(1) { animation-delay: 0.3s; }
+    .card:nth-child(2) { animation-delay: 0.5s; }
+    .card:nth-child(3) { animation-delay: 0.7s; }
+    ul {
+      padding-left: 20px;
+    }
+    /* Анимация кілт сөздері */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
-    <!-- Параллакс басты бет -->
-    <section class="hero">
-        <canvas id="grassCanvas"></canvas>
-        <div class="hero-content">
-            <img src="assets/images/kene-main.png" class="floating-img" alt="Кенесары">
-            <h1 class="title">
-                <span class="flame-text">Кенесары Қасымұлы</span>
-                <span class="subtitle">Қазақ хандығының соңғы ханы</span>
-            </h1>
-            <div class="scroll-down"></div>
-        </div>
-    </section>
-
-    <!-- Биография таймлайны -->
-    <section class="timeline-section">
-        <h2 class="section-title">Өмір жолы</h2>
-        <div class="timeline-container">
-            <div class="timeline-line"></div>
-            <div class="timeline-item left">
-                <div class="item-content">
-                    <h3>1802 - Дүниеге келуі</h3>
-                    <p>Әбілқайыр хан әулетінде туылды</p>
-                    <button class="audio-btn" onclick="playAudio('nomad')"><i class="fas fa-volume-up"></i></button>
-                </div>
-            </div>
-            <div class="timeline-item right">
-                <div class="item-content">
-                    <h3>1837-1847 - Ұлт-азаттық күрес</h3>
-                    <p>Ресей империясына қарсы 10 жылдық соғыс</p>
-                    <div class="war-stat">
-                        <div class="stat-item">
-                            <div class="stat-bar" data-percent="72"></div>
-                            <span>Жеңіс</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Интерактивті карта -->
-    <section class="map-section">
-        <h2 class="section-title">Жорықтар картасы</h2>
-        <div id="battleMap"></div>
-    </section>
-
-    <!-- Виртуалды галерея -->
-    <section class="gallery-section">
-        <div class="gallery-grid">
-            <div class="gallery-item" data-artifact="sword">
-                <img src="assets/images/sword.png" alt="Қылыш">
-                <div class="artifact-info">Кенесарыдың қылышы</div>
-            </div>
-            <div class="gallery-item" data-artifact="yurt">
-                <img src="assets/images/yurt.png" alt="Киіз үй">
-                <div class="artifact-info">Хан ордасы</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- AI сұхбат бөлімі -->
-    <div class="ai-chat">
-        <div class="chat-container">
-            <div class="chat-history" id="chatHistory"></div>
-            <input type="text" id="userInput" placeholder="Кенесарыға сұрақ қойыңыз...">
-            <button onclick="askAI()"><i class="fas fa-paper-plane"></i></button>
-        </div>
+  <header>
+    <h1>Кенесары Қасымұлы</h1>
+  </header>
+  <nav>
+    <a href="#history">Тарих</a>
+    <a href="#achievements">Жетістіктер</a>
+    <a href="#legacy">Мұрасы</a>
+  </nav>
+  <section id="history">
+    <div class="card">
+      <h2>Кіріспе</h2>
+      <p>Кенесары Қасымұлы – Қазақ хандығының тарихында ерекше орын алатын, халықтың тәуелсіздігі мен бірегейлігін қорғаған ұлы көшбасшы.</p>
     </div>
-
-    <!-- Скрипттер -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <script src="script.js"></script>
+    <div class="card">
+      <h2>Тарихи Аспектілер</h2>
+      <p>Ол қазақ жерін шетелдік басқыншылыққа қарсы қорғау үшін күрес жүргізіп, ұлттық бірлік пен еркіндік идеясын алға тартты. Оның ерліктері мен батырлығы көптеген аңыздарға айналды.</p>
+    </div>
+    <div class="card">
+      <h2>Қызықты Ақпараттар</h2>
+      <p>Кенесарының өмірі мен қызметі бүгінгі күнге дейін ұлттық рухты оятатын дереккөз болып табылады. Ол жайлы көптеген тарихи деректер мен аңыздар сақталған.</p>
+    </div>
+  </section>
+  <section id="achievements">
+    <div class="card">
+      <h2>Негізгі Жетістіктер</h2>
+      <ul>
+        <li>Қазақ жерінің тәуелсіздігі үшін күресті ұйымдастырды</li>
+        <li>Халықты біріктіріп, ұлттық бірлікті нығайтты</li>
+        <li>Ерлік пен батырлықтың символына айналды</li>
+      </ul>
+    </div>
+  </section>
+  <section id="legacy">
+    <div class="card">
+      <h2>Мұра мен Құндылықтар</h2>
+      <p>Кенесары Қасымұлының мұрасы қазақ тарихында мәңгілік із қалдырды. Оның өмірі мен ізі жастарға ерлік, қайсарлық және ұлттық мақтаныштың үлгісі болып табылады.</p>
+    </div>
+  </section>
+  <script>
+    // Қосымша: бетке кірген кезде карточкалардың анимациясын іске қосу
+    const cards = document.querySelectorAll('.card');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+        }
+      });
+    }, { threshold: 0.1 });
+    cards.forEach(card => {
+      observer.observe(card);
+    });
+  </script>
 </body>
 </html>
