@@ -3,66 +3,103 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Кенесары Қасымұлы</title>
+  <title>Кенесары Қасымұлы – Тарих пен мұра</title>
   <style>
-    /* Негізгі стильдер - минимализм және таза дизайн */
+    /* Негізгі стильдер */
     body {
       margin: 0;
       padding: 0;
       font-family: 'Helvetica Neue', Arial, sans-serif;
-      background-color: #f5f5f5;
+      background: #f0f0f0;
       color: #333;
       overflow-x: hidden;
     }
     header {
-      background-color: #333;
-      color: #fff;
-      text-align: center;
-      padding: 30px 20px;
       position: relative;
+      text-align: center;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: #fff;
       overflow: hidden;
     }
     header h1 {
       margin: 0;
-      font-size: 2.5rem;
+      font-size: 2.8rem;
       animation: fadeInDown 1s ease-out;
     }
-    nav {
-      background-color: #444;
+    /* Портрет және символ суреттері */
+    .intro-images {
+      margin-top: 20px;
       display: flex;
       justify-content: center;
-      padding: 10px 0;
+      gap: 20px;
+      flex-wrap: wrap;
     }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      margin: 0 15px;
-      font-size: 1.1rem;
-      position: relative;
+    .intro-images img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid #fff;
+      animation: float 3s ease-in-out infinite;
     }
-    nav a::after {
-      content: "";
+    /* Интерактивті анимация - дала және атты жауынгерлер үлгісі */
+    .animated-background {
       position: absolute;
-      width: 100%;
-      transform: scaleX(0);
-      height: 2px;
-      bottom: -5px;
+      top: 0;
       left: 0;
-      background-color: #fff;
-      transform-origin: bottom right;
-      transition: transform 0.25s ease-out;
+      width: 200%;
+      height: 100%;
+      background: url('https://via.placeholder.com/800x400?text=Дала') repeat-x;
+      animation: slide 20s linear infinite;
+      opacity: 0.15;
     }
-    nav a:hover::after {
-      transform: scaleX(1);
-      transform-origin: bottom left;
+    @keyframes slide {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
     }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    /* Навигация */
+    nav {
+      background: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 10px 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    nav button {
+      background: none;
+      border: none;
+      margin: 5px 10px;
+      padding: 10px 15px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+    nav button:hover {
+      background: #1e3c72;
+      color: #fff;
+      border-radius: 4px;
+    }
+    /* Негізгі бөлімдер стилі */
     section {
       padding: 40px 20px;
-      max-width: 800px;
+      max-width: 1000px;
       margin: auto;
     }
-    .card {
-      background-color: #fff;
+    .section-content {
+      background: #fff;
       margin-bottom: 20px;
       padding: 20px;
       border-radius: 8px;
@@ -71,17 +108,9 @@
       transform: translateY(20px);
       animation: fadeInUp 1s forwards;
     }
-    .card:nth-child(1) { animation-delay: 0.3s; }
-    .card:nth-child(2) { animation-delay: 0.5s; }
-    .card:nth-child(3) { animation-delay: 0.7s; }
-    ul {
-      padding-left: 20px;
-    }
-    /* Анимация кілт сөздері */
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    .section-content:nth-child(1) { animation-delay: 0.3s; }
+    .section-content:nth-child(2) { animation-delay: 0.5s; }
+    .section-content:nth-child(3) { animation-delay: 0.7s; }
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -90,56 +119,166 @@
 </head>
 <body>
   <header>
+    <div class="animated-background"></div>
     <h1>Кенесары Қасымұлы</h1>
+    <p>Ұлы көшбасшы, батыр және ұлттық бірліктің символы</p>
+    <div class="intro-images">
+      <!-- Портрет және символ суреттері. URL-дерді нақты суреттермен ауыстыруға болады -->
+      <img src="https://via.placeholder.com/150?text=Портрет" alt="Кенесары портреті">
+      <img src="https://via.placeholder.com/150?text=Символ" alt="Символдық сурет">
+    </div>
   </header>
+  
+  <!-- Навигация батырмалары -->
   <nav>
-    <a href="#history">Тарих</a>
-    <a href="#achievements">Жетістіктер</a>
-    <a href="#legacy">Мұрасы</a>
+    <button onclick="scrollToSection('ombai')">1. Өмірбаяны</button>
+    <button onclick="scrollToSection('unlat')">2. Ұлт-азаттық күресі</button>
+    <button onclick="scrollToSection('sayasi')">3. Саяси мұрасы</button>
+    <button onclick="scrollToSection('askeri')">4. Әскери данышпандығы</button>
+    <button onclick="scrollToSection('maden')">5. Мәдени әсері</button>
+    <button onclick="scrollToSection('tarikhi')">6. Тарихи деректер</button>
+    <button onclick="scrollToSection('mifter')">7. Мифтер мен шындықтар</button>
+    <button onclick="scrollToSection('interactive')">8. Интерактивті бөлімдер</button>
+    <button onclick="scrollToSection('galereya')">9. Галерея</button>
+    <button onclick="scrollToSection('qundylyq')">10. Құндылықтар мұрасы</button>
+    <button onclick="scrollToSection('adebiyyatlar')">11. Әдебиеттер тізімі</button>
   </nav>
-  <section id="history">
-    <div class="card">
-      <h2>Кіріспе</h2>
-      <p>Кенесары Қасымұлы – Қазақ хандығының тарихында ерекше орын алатын, халықтың тәуелсіздігі мен бірегейлігін қорғаған ұлы көшбасшы.</p>
-    </div>
-    <div class="card">
-      <h2>Тарихи Аспектілер</h2>
-      <p>Ол қазақ жерін шетелдік басқыншылыққа қарсы қорғау үшін күрес жүргізіп, ұлттық бірлік пен еркіндік идеясын алға тартты. Оның ерліктері мен батырлығы көптеген аңыздарға айналды.</p>
-    </div>
-    <div class="card">
-      <h2>Қызықты Ақпараттар</h2>
-      <p>Кенесарының өмірі мен қызметі бүгінгі күнге дейін ұлттық рухты оятатын дереккөз болып табылады. Ол жайлы көптеген тарихи деректер мен аңыздар сақталған.</p>
-    </div>
-  </section>
-  <section id="achievements">
-    <div class="card">
-      <h2>Негізгі Жетістіктер</h2>
+  
+  <!-- Негізгі бөлімдердің бірінші бөлімі -->
+  <section id="ombai">
+    <div class="section-content">
+      <h2>Өмірбаяны</h2>
+      <p>Кенесары Қасымұлының өмір жолы – батырлық, қайсарлық пен ұлттық рухтың айнасы. Төменде өмірбаянының негізгі кезеңдері көрсетілген:</p>
       <ul>
-        <li>Қазақ жерінің тәуелсіздігі үшін күресті ұйымдастырды</li>
-        <li>Халықты біріктіріп, ұлттық бірлікті нығайтты</li>
-        <li>Ерлік пен батырлықтың символына айналды</li>
+        <li><strong>Балалық шағы және отбасы:</strong> Әкесі Қасым хан, әулет тарихы</li>
+        <li><strong>Билікке келуі:</strong> Хандық таққа отыруы, саяси бағдарламасы</li>
+        <li><strong>Соңғы жылдары және қаза тапқан жері</strong></li>
       </ul>
     </div>
   </section>
-  <section id="legacy">
-    <div class="card">
-      <h2>Мұра мен Құндылықтар</h2>
-      <p>Кенесары Қасымұлының мұрасы қазақ тарихында мәңгілік із қалдырды. Оның өмірі мен ізі жастарға ерлік, қайсарлық және ұлттық мақтаныштың үлгісі болып табылады.</p>
+  
+  <section id="unlat">
+    <div class="section-content">
+      <h2>Ұлт-азаттық күресі</h2>
+      <p>Ұлт азаттық жолындағы күресі аясында:</p>
+      <ul>
+        <li><strong>Шайқастар хронологиясы:</strong> Негізгі шайқастардың картасы, стратегиялары</li>
+        <li><strong>Жоңғар шапқыншылығына қарсы күрес</strong></li>
+        <li><strong>Ресей империясымен қарым-қатынас</strong></li>
+      </ul>
     </div>
   </section>
+  
+  <section id="sayasi">
+    <div class="section-content">
+      <h2>Саяси мұрасы</h2>
+      <p>Кенесары Қасымұлының саяси мұрасы:</p>
+      <ul>
+        <li>Хандық билік жүйесін қалпына келтіруге деген ұмтылысы</li>
+        <li>Этникалық бірлікті нығайту саясаты</li>
+        <li>Заңдар және әлеуметтік реформалар</li>
+      </ul>
+    </div>
+  </section>
+  
+  <section id="askeri">
+    <div class="section-content">
+      <h2>Әскери данышпандығы</h2>
+      <p>Оның әскери стратегиясы мен тактикалары:</p>
+      <ul>
+        <li>Тарихи маңызды шайқастарды талдау (Торғай, Ұлытау, т.б.)</li>
+        <li>Жергілікті тайпаларды біріктіру стратегиясы</li>
+        <li>Жаңа әскери тактикалар</li>
+      </ul>
+    </div>
+  </section>
+  
+  <section id="maden">
+    <div class="section-content">
+      <h2>Мәдени әсері</h2>
+      <p>Кенесары тұлғасының мәдениетке әсері:</p>
+      <ul>
+        <li><strong>Аңыздар мен дастандардағы Кенесары</strong></li>
+        <li><strong>Әдебиетте, кино мен музыкада</strong></li>
+        <li><strong>Қазіргі заманғы патриоттық білім берудегі орны</strong></li>
+      </ul>
+    </div>
+  </section>
+<section id="tarikhi">
+  <div class="section-content">
+    <h2>Тарихи деректер</h2>
+    <ul>
+      <li><strong>Хаттар мен құжаттар:</strong> Ресей патшасына жазған хатының көшірмесі</li>
+      <li><strong>Сәулет ескерткіштері:</strong> Қазақстан бойынша орналасқан 13 ескерткіш</li>
+      <li><strong>Архивтік фотосуреттер:</strong> Кенесары туралы тарихи архивтік суреттер жиынтығы</li>
+    </ul>
+  </div>
+</section>
+
+<section id="mifter">
+  <div class="section-content">
+    <h2>Мифтер мен шындықтар</h2>
+    <p>Тарихнамадағы пікірталастар мен әртүрлі көзқарастар:</p>
+    <ul>
+      <li>«Хан ма, қақпай ма?» деген тақырып</li>
+      <li>Ғалымдардың пікірлері және заманауи зерттеулер</li>
+    </ul>
+  </div>
+</section>
+
+<section id="interactive">
+  <div class="section-content">
+    <h2>Интерактивті бөлімдер</h2>
+    <ul>
+      <li><strong>Виртуалды карта:</strong> Жорық жолдарын 3D форматта көру мүмкіндігі</li>
+      <li><strong>AI-сұхбат:</strong> ChatGPT арқылы Кенесарыдың "виртуалды елесімен" әңгімелесу</li>
+      <li><strong>Тесттер:</strong> "Кенесары сияқты шешім қабылда!" сынағы</li>
+    </ul>
+  </div>
+</section>
+
+<section id="galereya">
+  <div class="section-content">
+    <h2>Галерея</h2>
+    <p>Суреттер, инфографикалар, қолжазбалар және тарихи реконструкциялар видеоматериалдары:</p>
+    <ul>
+      <li>Суреттер және инфографика</li>
+      <li>Қолжазбалар коллекциясы</li>
+      <li>Тарихи реконструкция видеолары</li>
+    </ul>
+  </div>
+</section>
+
+<section id="qundylyq">
+  <div class="section-content">
+    <h2>Құндылықтар мұрасы</h2>
+    <p>Ұрпақтарға арналған хабар мен қазіргі саясаттағы оқулар:</p>
+    <ul>
+      <li>Ұрпақтарға арналған патриоттық хабарлама</li>
+      <li>Қазіргі саясаттағы оқулар және білім беру бағдарламалары</li>
+    </ul>
+  </div>
+</section>
+
+<section id="adebiyyatlar">
+  <div class="section-content">
+    <h2>Әдебиеттер тізімі</h2>
+    <p>Кітаптар, ғылыми мақалалар және алынған дереккөздер:</p>
+    <ul>
+      <li>Тарихи деректерге арналған негізгі кітаптар</li>
+      <li>Ғылыми зерттеулер мен мақалалар</li>
+      <li>Сілтемелер мен дереккөздердің тізімі</li>
+    </ul>
+  </div>
+</section>
   <script>
-    // Қосымша: бетке кірген кезде карточкалардың анимациясын іске қосу
-    const cards = document.querySelectorAll('.card');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.animationPlayState = 'running';
-        }
-      });
-    }, { threshold: 0.1 });
-    cards.forEach(card => {
-      observer.observe(card);
-    });
+    // Батырмаларға арналған бөлімге жылжу функциясы
+    function scrollToSection(id) {
+      const section = document.getElementById(id);
+      if(section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
   </script>
 </body>
 </html>
